@@ -1,0 +1,1 @@
+javac -cp stdlib.jar:algs4.jar:. Percolation.java

@@ -25,8 +25,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public boolean isEmpty() {
-
-        if (first == null || last == null) {
+        if (first == null) {
             return true;
         } else {
             return false;
@@ -38,10 +37,11 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addFirst(Item item) {
+        checkNullItem(item);
         Node<Item> oldFirst = first;
         if (first == null) {
-            last = new Node<Item>();
-            first = last;
+            first = new Node<Item>();
+            last = first;
         } else {
             first = new Node<Item>();
             oldFirst.prev = first;
@@ -51,8 +51,25 @@ public class Deque<Item> implements Iterable<Item> {
         first.prev = null;
         N++;
     }
-
+    
     public void addLast(Item item) {
+        checkNullItem(item);
+        Node<Item> oldLast = last;
+        if (last == null){
+            last = new Node<Item>();
+            first = last;
+        }else {
+            last = new Node<Item>();
+            oldLast.next = last;
+        }
+        last.item = item;
+        last.next = null;
+        last.prev = oldLast;
+        N++;
+    }
+
+    /*public void addLast(Item item) {
+        checkNullItem(item);
         Node<Item> newLast = new Node<Item>();
         newLast.item = item;
         newLast.next = null;
@@ -60,35 +77,33 @@ public class Deque<Item> implements Iterable<Item> {
         last.next = newLast;
         last = newLast;
         N++;
-    }
+    }*/
 
     public Item removeFirst() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Stack underflow");
-        }
+        checkRemoveFromEmpty();
         Item firstItem = first.item;
         first = first.next;
-        first.prev = null;
+        if (first != null) {
+            first.prev = null;
+        }else {
+            first = null;
+            last = first;
+        }        
         N--;
-        if (isEmpty()) {
-            last = null;
-        }
         return firstItem;
     }
 
     public Item removeLast() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Stack underflow");
-        }
+        checkRemoveFromEmpty();
         Item lastItem = last.item;
         last = last.prev;
         if (last != null) {
             last.next = null;
+        }else {
+            last = null;
+            first = last;
         }
         N--;
-        if (isEmpty()) {
-            first = null;
-        }
         return lastItem;
     }
 
@@ -139,5 +154,20 @@ public class Deque<Item> implements Iterable<Item> {
         return s.toString();
     }
 
+    private void checkNullItem(Item item) {
+        if (item == null) {
+            throw new NullPointerException("You attempt to insert a NULL item !!! ");
+        }
+    }
+
+    private void checkRemoveFromEmpty() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Stack underflow");
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+    }
 }
 

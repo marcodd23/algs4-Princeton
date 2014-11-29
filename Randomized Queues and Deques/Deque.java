@@ -51,14 +51,14 @@ public class Deque<Item> implements Iterable<Item> {
         first.prev = null;
         N++;
     }
-    
+
     public void addLast(Item item) {
         checkNullItem(item);
         Node<Item> oldLast = last;
-        if (last == null){
+        if (last == null) {
             last = new Node<Item>();
             first = last;
-        }else {
+        } else {
             last = new Node<Item>();
             oldLast.next = last;
         }
@@ -69,26 +69,25 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     /*public void addLast(Item item) {
-        checkNullItem(item);
-        Node<Item> newLast = new Node<Item>();
-        newLast.item = item;
-        newLast.next = null;
-        newLast.prev = last;
-        last.next = newLast;
-        last = newLast;
-        N++;
-    }*/
-
+     checkNullItem(item);
+     Node<Item> newLast = new Node<Item>();
+     newLast.item = item;
+     newLast.next = null;
+     newLast.prev = last;
+     last.next = newLast;
+     last = newLast;
+     N++;
+     }*/
     public Item removeFirst() {
         checkRemoveFromEmpty();
         Item firstItem = first.item;
         first = first.next;
         if (first != null) {
             first.prev = null;
-        }else {
+        } else {
             first = null;
             last = first;
-        }        
+        }
         N--;
         return firstItem;
     }
@@ -99,7 +98,7 @@ public class Deque<Item> implements Iterable<Item> {
         last = last.prev;
         if (last != null) {
             last.next = null;
-        }else {
+        } else {
             last = null;
             first = last;
         }
@@ -145,14 +144,14 @@ public class Deque<Item> implements Iterable<Item> {
 
     }
 
-    public String toString() {
+    /*private String toString() {
         StringBuilder s = new StringBuilder();
         Iterator<Item> iterator = this.iterator();
         while (iterator.hasNext()) {
             s.append(iterator.next() + " ");
         }
         return s.toString();
-    }
+    }*/
 
     private void checkNullItem(Item item) {
         if (item == null) {
@@ -165,9 +164,85 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NoSuchElementException("Stack underflow");
         }
     }
-    
+
     public static void main(String[] args) {
-        
+        int N = 100;
+        Integer[] array = new Integer[N];
+        Deque<Integer> deque = new Deque<Integer>();
+        for (int i = 1; i <= N; i++) {
+            deque.addFirst(i);
+        }
+        int choise;
+        int inputItem;
+        int removed;
+
+        while (true) {
+
+            StdOut.println("Select :\n");
+            StdOut.println("Add an number on head: 1\n");
+            StdOut.println("Add an number on tail: 2\n");
+            StdOut.println("Remove an number on head: 3\n");
+            StdOut.println("Remove an number on tail: 4\n");
+            StdOut.println("EXIT                    : 5\n");
+
+            int selection = StdIn.readInt();
+
+            switch (selection) {
+                case 1: {
+                    do {
+                        StdOut.println("Enter the number to add on head: \n");
+                        inputItem = StdIn.readInt();
+                        deque.addFirst(inputItem);
+                        StdOut.println("There are \"" + deque.size() + "\" items in the Deque\n");         
+                        StdOut.println("press 1 to insert another or 0 to continue: \n");
+                        choise = StdIn.readInt();              
+                    } while (choise != 0);
+                    break;
+                }
+                case 2: {
+                    do {
+                        StdOut.println("Enter the number to add on tail: \n");
+                        inputItem = StdIn.readInt();
+                        deque.addLast(inputItem);
+                        StdOut.println("There are \"" + deque.size() + "\" items in the Deque\n");
+                        StdOut.println("press 1 to insert another or 0 to continue: \n");
+                        choise = StdIn.readInt();  
+                    } while (choise != 0);
+                    break;
+                }
+                case 3: {
+                    do {
+                        removed = deque.removeFirst();
+                        StdOut.println("removed " + removed + " from head\n");
+                        StdOut.println("There are \"" + deque.size() + "\" items in the Deque\n");
+                        StdOut.println("Press 1 to remove another item from head or press 0 to continue \n");
+                        choise = StdIn.readInt();  
+                    } while (choise != 0);
+                    break;
+                }
+                case 4: {
+                    do {
+                        removed = deque.removeLast();
+                        StdOut.println("removed " + removed + " from head\n");
+                        StdOut.println("There are \"" + deque.size() + "\" items in the Deque\n");
+                        StdOut.println("Press 1 to remove another item from head or press 0 to continue \n");
+                        choise = StdIn.readInt();  
+                    } while (choise != 0);
+                    break;
+                }
+                case 5: {
+                    return;
+                }
+            }
+        }
+        /*for (int i = 0; !deque.isEmpty(); i++) {
+         Integer last = deque.removeLast();
+         array[i] = last;
+         System.out.print(last + " ");
+         }*/
+        //System.out.println("\n");
+        //assertTrue(deque.isEmpty());
+        //assertTrue(isSorted(array));
+
     }
 }
-

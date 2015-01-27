@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------
+ *  Author:        Marco Di Dionisio
+ *
+ *  Compilation:   javac -cp ../stdlib.jar:../algs4.jar:. Deque.java
+ *  Execution:     java -cp ../stdlib.jar:../algs4.jar:. Deque
+ *
+ *  Tests the percolation as per the specification available at:
+ *    http://coursera.cs.princeton.edu/algs4/assignments/percolation.html
+ *
+ *----------------------------------------------------------------*/
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -179,10 +190,10 @@ public class Deque<Item> implements Iterable<Item> {
         while (true) {
 
             StdOut.println("Select :\n");
-            StdOut.println("Add an number on head: 1\n");
-            StdOut.println("Add an number on tail: 2\n");
-            StdOut.println("Remove an number on head: 3\n");
-            StdOut.println("Remove an number on tail: 4\n");
+            StdOut.println("Add a number on head: 1\n");
+            StdOut.println("Add a number on tail: 2\n");
+            StdOut.println("Remove a number on head: 3\n");
+            StdOut.println("Remove a number on tail: 4\n");
             StdOut.println("EXIT                    : 5\n");
 
             int selection = StdIn.readInt();

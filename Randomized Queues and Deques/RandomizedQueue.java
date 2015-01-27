@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------
+ *  Author:        Marco Di Dionisio
+ *
+ *  Compilation:   javac -cp ../stdlib.jar:../algs4.jar:. RandomizedQueue.java
+ *  Execution:     java -cp ../stdlib.jar:../algs4.jar:. RandomizedQueue
+ *
+ *  Tests the percolation as per the specification available at:
+ *    http://coursera.cs.princeton.edu/algs4/assignments/percolation.html
+ *
+ *----------------------------------------------------------------*/
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

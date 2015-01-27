@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------
+ *  Author:        Marco Di Dionisio
+ *
+ *  Compilation:   javac -cp ../stdlib.jar:../algs4.jar:. fast.java
+ *  Execution:     java -cp ../stdlib.jar:../algs4.jar:. Fast ./collinear-input/input.txt
+ *
+ *  Tests the percolation as per the specification available at:
+ *    http://coursera.cs.princeton.edu/algs4/assignments/percolation.html
+ *
+ *----------------------------------------------------------------*/
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

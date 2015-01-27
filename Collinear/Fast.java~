@@ -1,0 +1,76 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ *
+ * @author marco
+ */
+public class Fast {
+
+    public static void main(String[] args) {
+
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+
+        Point pointArray[];
+
+        // read in the input
+        String filename = args[0];
+        In in = new In(filename);
+        int N = in.readInt();
+        pointArray = new Point[N];
+        for (int i = 0; i < N; i++) {
+            int x = in.readInt();
+            int y = in.readInt();
+            pointArray[i] = new Point(x, y);
+            pointArray[i].draw();
+        }
+
+        for (int i = 0; i < N; i++) {
+            Point p = pointArray[i];
+            Arrays.sort(pointArray, i + 1, N, p.SLOPE_ORDER);
+            double prevSlope;
+            double actualSlope;
+            List<Point> collinearPoints;
+            int j = i + 1;
+            while (j < N) {
+                int refPoint = j;
+                actualSlope = pointArray[i].slopeTo(pointArray[refPoint]);
+                collinearPoints = new ArrayList<>();
+                collinearPoints.add(pointArray[i]);
+                collinearPoints.add(pointArray[refPoint]);
+                if ((refPoint + 1) < N && actualSlope == pointArray[i].slopeTo(pointArray[refPoint + 1])) {
+                    collinearPoints.add(pointArray[refPoint + 1]);
+                    j = j + 1;
+                    if ((refPoint + 2) < N && actualSlope == pointArray[i].slopeTo(pointArray[refPoint + 2])) {
+                        collinearPoints.add(pointArray[refPoint + 2]);
+                        j = j + 2;
+                        for (int k = refPoint + 3; k < N; k++) {
+                            if (actualSlope == pointArray[i].slopeTo(pointArray[k])) {
+                                collinearPoints.add(pointArray[k]);
+                                j = k;
+                            } else {
+                                break;
+                            }
+                        }
+                        Collections.sort(collinearPoints);
+                        int size = collinearPoints.size();
+                        for (int k = 0; k < size - 1; k++) {
+                            StdOut.print(collinearPoints.get(k));
+                            StdOut.print(" -> ");
+                        }
+                        StdOut.println(collinearPoints.get(size - 1) + "\n");
+                        collinearPoints.get(0).drawTo(collinearPoints.get(size - 1));
+                    }
+                } else {
+                    j = j + 1;
+                }
+            }
+        }
+
+    }
+
+}
+

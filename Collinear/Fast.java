@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class Fast {
 
-    public static void printPoints(Point pointArray[], int N, In inputFile) {
+    private static void printPoints(Point pointArray[], int N, In inputFile) {
         for (int i = 0; i < N; i++) {
             int x = inputFile.readInt();
             int y = inputFile.readInt();
@@ -29,7 +29,7 @@ public class Fast {
         }
     }
 
-    public static boolean checkSubSegments(List<Point> discoveredStartSegments, List<Point> collinearPoints, double actualSlope) {
+    private static boolean checkSubSegments(List<Point> discoveredStartSegments, List<Point> collinearPoints, double actualSlope) {
         boolean subSegment = false;
         if (!discoveredStartSegments.isEmpty()) {
             for (Point point : discoveredStartSegments) {
@@ -42,7 +42,7 @@ public class Fast {
         return subSegment;
     }
 
-    public static void printDiscoveredSegments(boolean subSegment, List<Point> collinearPoints) {
+    private static void printDiscoveredSegments(boolean subSegment, List<Point> collinearPoints) {
 
         if (!subSegment) {
             int size = collinearPoints.size();
